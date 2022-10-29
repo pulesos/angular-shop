@@ -1,0 +1,37 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <div class="toolbar no-select" routerLink="">
+        <mat-icon style="margin-right: 5px">home</mat-icon>
+        <span>Online Shop</span>
+      </div>
+      <span class="example-spacer"></span>
+      <div class="toolbar no-select">
+        <button class="toolbar button" mat-flat-button routerLink="">Главная</button>
+        <button class="toolbar button" mat-flat-button routerLink="products">Товары</button>
+        <button class="toolbar button" mat-flat-button routerLink="basket">Корзина</button>
+        <button class="toolbar button" mat-flat-button routerLink="sign-up">Зарегистрироваться</button>
+        
+        <ng-container *ngIf="authService.currentUser$ | async as user; else loginButton">
+          <button mat-button [matMenuTriggerFor]="userMenu">
+            <img class="profile-image-toolbar" width="30" height="30" [src]="user.photoURL ?? 'https://cdn-icons-png.flaticon.com/512/147/147142.png'">
+            <button class="toolbar button" mat-flat-button>{{user.displayName}}</button>
+            <mat-icon>expand_more</mat-icon>
+          </button>
+
+        </ng-container>
+
+        <ng-template #loginButton>
+          <button class="toolbar button" mat-flat-button routerLink="login">Войти</button>
+        </ng-template>
+
+      </div>
+
+    </mat-toolbar-row>
+</mat-toolbar> 
+
+<mat-menu #userMenu="matMenu">
+  <button mat-menu-item (click)="logout()">Logout</button>
+  <button mat-menu-item routerLink="/profile">Profile</button>
+
+</mat-menu>
+  

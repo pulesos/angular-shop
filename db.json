@@ -1,0 +1,57 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "title": "MacBook Air",
+      "price": 900,
+      "year": "2019",
+      "image": "https://avatars.mds.yandex.net/get-mpic/3927509/img_id2755768017256529923.jpeg/orig",
+      "configure": {
+        "chip": "M1",
+        "ssd": "256 GB",
+        "memory": "8 GB",
+        "display": "Retina"
+      }
+    },
+    {
+      "id": 2,
+      "title": "MacBook Pro",
+      "price": 1000,
+      "year": "2020",
+      "image": "https://avatars.mds.yandex.net/get-mpic/3927509/img_id2755768017256529923.jpeg/orig",
+      "configure": {
+        "chip": "M1",
+        "ssd": "256 GB",
+        "memory": "16 GB",
+        "display": "Retina"
+      }
+    },
+    {
+      "id": 3,
+      "title": "MacBook Pro (Intel)",
+      "price": 1300,
+      "year": "2021",
+      "image": "https://avatars.mds.yandex.net/get-mpic/3927509/img_id2755768017256529923.jpeg/orig",
+      "configure": {
+        "chip": "M1",
+        "ssd": "256 GB",
+        "memory": "16 GB",
+        "display": "Retina"
+      }
+    },
+    {
+      "id": 4,
+      "title": "sdfsdf",
+      "price": "500",
+      "year": "19967",
+      "image": "https://avatars.mds.yandex.net/get-mpic/3927509/img_id2755768017256529923.jpeg/orig",
+      "configure": {
+        "chip": "567",
+        "ssd": "56765",
+        "memory": "56",
+        "display": "456"
+      }
+    }
+  ],
+  "basket": []
+}

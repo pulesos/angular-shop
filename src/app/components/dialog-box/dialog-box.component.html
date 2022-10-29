@@ -1,0 +1,43 @@
+<form [formGroup]="myForm" (ngSubmit)="onSubmit()" class="example-form">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title">
+    </mat-form-field>
+    <p *ngIf="this.myForm.get('title')?.invalid && this.myForm.get('title')?.touched"><small class="text-danger">Title is required!</small></p>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Price</mat-label>
+      <input matInput formControlName="price">
+    </mat-form-field>
+    <p *ngIf="this.myForm.get('price')?.invalid && this.myForm.get('price')?.touched"><small class="text-danger">Price is required! Number only!</small></p>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Year</mat-label>
+      <input matInput formControlName="year">
+    </mat-form-field>
+    <p *ngIf="this.myForm.get('year')?.invalid && this.myForm.get('year')?.touched"><small class="text-danger">Year is required! Number only!</small></p>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Chip</mat-label>
+      <input matInput formControlName="chip">
+    </mat-form-field>
+    <p *ngIf="this.myForm.get('chip')?.invalid && this.myForm.get('chip')?.touched"><small class="text-danger">Chip is required! Number only!</small></p>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>SSD</mat-label>
+      <input matInput formControlName="ssd">
+    </mat-form-field>
+    <p *ngIf="this.myForm.get('ssd')?.invalid && this.myForm.get('ssd')?.touched"><small class="text-danger">SSD is required! Number only!</small></p>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Memory</mat-label>
+      <input matInput formControlName="memory">
+    </mat-form-field>
+    <p *ngIf="this.myForm.get('memory')?.invalid && this.myForm.get('memory')?.touched"><small class="text-danger">Memory is required! Number only!</small></p>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Display</mat-label>
+      <input matInput formControlName="display">
+    </mat-form-field>
+    <p *ngIf="this.myForm.get('display')?.invalid && this.myForm.get('display')?.touched"><small class="text-danger">Display is required!</small></p>
+
+    <button class="button" [disabled]="myForm.invalid" mat-flat-button style="margin-right: 2px" color="primary" type="submit">{{isNew ? 'Добавить товар' : 'Обновить'}}</button>
+    <button class="button" mat-flat-button color="primary" (click)="onNoClick()" type="button">Отмена</button>
+
+    
+</form>
+  
