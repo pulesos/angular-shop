@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-base',
@@ -8,9 +9,9 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 })
 export class BaseComponent implements OnInit {
 
-  user$ = this.authService.currentUser$
+  user$ = this.usersService.currentUserProfile$;
 
-  constructor(public authService: AuthenticationService) {
+  constructor(private usersService: UsersService) {
 
   }
 

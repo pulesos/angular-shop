@@ -4,7 +4,13 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 import { ImageUploadService } from 'src/app/services/image-upload.service';
 import { HotToastService } from '@ngneat/hot-toast';
 import { concatMap } from 'rxjs';
+import { FormControl, FormGroup } from '@angular/forms';
+import { UsersService } from 'src/app/services/users.service';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { ProfileUser } from 'src/app/models/user-profile';
 
+
+@UntilDestroy()
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -12,13 +18,28 @@ import { concatMap } from 'rxjs';
 })
 export class ProfileComponent implements OnInit {
 
-  user$ = this.authService.currentUser$
-  constructor(private authService: AuthenticationService, private imageUploadService: ImageUploadService, private toast: HotToastService) { }
+  user$ = this.usersService.currentUserProfile$
+
+  profileForm = new FormGroup({
+    uid: new FormControl(''),
+    displayName: new FormControl(''),
+    firstName: new FormControl(''),
+    lastName: new FormControl(''),
+    phone: new FormControl(''),
+    address: new FormControl('')
+  })
+
+  constructor(private authService: AuthenticationService, private imageUploadService: ImageUploadService, private toast: HotToastService, private usersService: UsersService) { }
 
   ngOnInit(): void {
+    this.usersService.currentUserProfile$.pipe(
+      untilDestroyed(this)
+    ).subscribe((user) => {
+      this.profileForm.patchValue({...user})
+    })
   }
 
-  uploadImage(event: any, user: User) {
+  uploadImage(event: any, user: ProfileUser) {
     this.imageUploadService.uploadImage(event.target.files[0], `images/profile/${user.uid}`).pipe(
       this.toast.observe(
         {
@@ -27,8 +48,19 @@ export class ProfileComponent implements OnInit {
           error: 'There was an error in uploading'
         }
       ),
-      concatMap((photoURL) => this.authService.updateProfileData({photoURL}))
+      concatMap((photoURL) => this.usersService.updateUser({uid: user.uid,photoURL}))
       ).subscribe()
+  }
+
+  saveProfile() {
+    const profileData = this.profileForm.value;
+    this.usersService.updateUser(profileData).pipe(
+      this.toast.observe({
+        loading: 'Updating data...',
+        success: 'Data has been updated',
+        error: 'There was an error in updating the data'
+      })
+    ).subscribe()
   }
 
 }

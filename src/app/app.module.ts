@@ -30,7 +30,8 @@ import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { getStorage, provideStorage } from '@angular/fire/storage';
 import { HotToastModule } from '@ngneat/hot-toast';
-import { ProfileComponent } from './components/profile/profile.component'; 
+import { ProfileComponent } from './components/profile/profile.component';
+// import { UsersComponent } from './services/users/users.component'; 
 
 @NgModule({
   declarations: [
@@ -44,7 +45,7 @@ import { ProfileComponent } from './components/profile/profile.component';
     BaseComponent,
     SignUpComponent,
     LoginComponent,
-    ProfileComponent
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

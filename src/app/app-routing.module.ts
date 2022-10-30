@@ -19,7 +19,7 @@ const routes: Routes = [
   {path: 'products', component: ProductsComponent, ...canActivate(redirectToLogin)},
   {path: 'product/:id', component: ProductDetailsComponent, resolve: {data: ProductResolver}},
   {path: 'basket', component: BasketComponent, ...canActivate(redirectToLogin)},
-  {path: 'sign-up', component: SignUpComponent, ...canActivate(redirectToHome)},
+  {path: 'sign-up', component: SignUpComponent},
   {path: 'login', component: LoginComponent, ...canActivate(redirectToHome)},
   {path: 'profile', component: ProfileComponent, ...canActivate(redirectToLogin)},
 

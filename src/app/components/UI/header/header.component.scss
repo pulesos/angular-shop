@@ -4,8 +4,7 @@
 
 
 .toolbar {
-    display: flex;
-    align-items: center;
+    margin-right: 25px;
   
     &.button {
       margin-left: 5px;
@@ -14,8 +13,30 @@
       }
     }
   }
+
+  .buttonSignUpOff {
+    display: none;
+  }
+
+  .buttonSignUpOn {
+    display: inline-block;
+    margin-right: 15px;
+  }
   
   .no-select {
     cursor: pointer;
     user-select: none;
+  }
+
+  mat-toolbar {
+    justify-content: space-between;
+  }
+  
+  .content {
+    padding: 32px;
+  }
+  
+  .profile-image-toolbar {
+    border-radius: 100%;
+    margin-right: 8px;
   }
