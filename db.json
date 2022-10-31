@@ -53,5 +53,17 @@
       }
     }
   ],
-  "basket": []
+  "basket": [
+    {
+      "display": "sdfcgs",
+      "title": "sss",
+      "id": "wys1hHNFZyLpkz3iYoea",
+      "chip": "1233",
+      "ssd": "123",
+      "price": "123123",
+      "memory": "123",
+      "year": "123123",
+      "quantity": 2
+    }
+  ]
 }

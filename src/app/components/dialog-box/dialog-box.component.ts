@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
   selector: 'app-dialog-box',
@@ -11,6 +12,7 @@ export class DialogBoxComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<DialogBoxComponent>,
+    private ProductsService: ProductsService,
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) {
     if (this.data) this.isNew = false;
@@ -35,26 +37,38 @@ export class DialogBoxComponent implements OnInit {
     this.dialogRef.close(null);
   }
 
-  onSubmit() {
+  async onSubmit() {
 
-    this.data = {
-      id: this.myForm.value.id,
-      title: this.myForm.value.title,
-      price: this.myForm.value.price,
-      year: this.myForm.value.year,
-      image: "https://avatars.mds.yandex.net/get-mpic/3927509/img_id2755768017256529923.jpeg/orig",
-      configure: {
-        chip: this.myForm.value.chip,
-        ssd: this.myForm.value.ssd,
-        memory: this.myForm.value.memory,
-        display: this.myForm.value.display,
-      }
+    // this.data = {
+    //   id: this.myForm.value.id,
+    //   title: this.myForm.value.title,
+    //   price: this.myForm.value.price,
+    //   year: this.myForm.value.year,
+    //   image: "https://avatars.mds.yandex.net/get-mpic/3927509/img_id2755768017256529923.jpeg/orig",
+    //   configure: {
+    //     chip: this.myForm.value.chip,
+    //     ssd: this.myForm.value.ssd,
+    //     memory: this.myForm.value.memory,
+    //     display: this.myForm.value.display,
+    //   }
+    // }
+
+    if (this.isNew) {
+      const response = await this.ProductsService.postProduct(this.myForm.value)
+    } else {
+      this.updateData()
     }
 
-    // console.log(this.myForm)
+    // this.updateData()
+    // console.log(response)
     
     this.dialogRef.close(this.data);
 
+  }
+
+  updateData() {
+    const productData = this.myForm.value;
+    this.ProductsService.updateProduct(productData).subscribe()
   }
 
   ngOnInit(): void {

@@ -26,12 +26,19 @@ export class ProductsComponent implements OnInit {
 
     this.canEdit = true;
 
-    this.productsSubscription = this.ProductsService.getProducts().subscribe((data) => {
-      this.products = data;
-    });
+    // this.productsSubscription = this.ProductsService.getProducts().subscribe((data) => {
+    //   this.products = data;
+    // });
 
-    this.basketSubscription = this.ProductsService.getProductFromBasket().subscribe((data) => {
-      this.basket = data
+    this.ProductsService.getProducts().subscribe(products => {
+      this.products = products
+    })
+
+    // this.basketSubscription = this.ProductsService.getProductFromBasket().subscribe(basket => {
+    //   this.basket = basket
+    // })
+    this.ProductsService.getProductFromBasket().subscribe(basket => {
+      this.basket = basket
     })
   }
 
@@ -53,25 +60,26 @@ export class ProductsComponent implements OnInit {
   }
 
   postToBasket(product: IProducts) {
-    this.ProductsService.postProductToBasket(product).subscribe((data) => {
-      this.basket.push(data)
-    })
+    this.ProductsService.postProductToBasket(product)
   }
 
   updateToBasket(product: IProducts) {
     product.quantity += 1;
-    this.ProductsService.updateProductToBasket(product).subscribe((data) => {
-
-    })
+    this.ProductsService.updateProductToBasket(product).subscribe()
   }
 
-  deleteItem(id: number) {
-    this.ProductsService.deleteProduct(id).subscribe(() => this.products.find((item) => {
-      if (id === item.id) {
-        let idx = this.products.findIndex((data) => data.id === id)
-        this.products.splice(idx, 1)
-      }
-    }))
+  // deleteItem(id: number) {
+  //   this.ProductsService.deleteProduct(id).subscribe(() => this.products.find((item) => {
+  //     if (id === item.id) {
+  //       let idx = this.products.findIndex((data) => data.id === id)
+  //       this.products.splice(idx, 1)
+  //     }
+  //   }))
+  // }
+
+  async deleteItem(product: IProducts) {
+    const response = await this.ProductsService.deleteProduct(product)
+    console.log(response)
   }
 
   openDialog(product?: IProducts): void {
@@ -81,34 +89,34 @@ export class ProductsComponent implements OnInit {
     dialogConfig.data = product;
     const dialogRef = this.dialog.open(DialogBoxComponent, dialogConfig);
   
-    dialogRef.afterClosed().subscribe((data) => {
-      if (data) {
-        if (data && data.id)
-          this.updateData(data)
-        else
-          this.postData(data)
-      }
+    // dialogRef.afterClosed().subscribe((data) => {
+    //   if (data) {
+    //     if (data && data.id)
+    //       this.updateData(data)
+    //     else
+    //       this.postData(data)
+    //   }
 
-    })
+    // })
   }
 
-  postData(data: IProducts) {
-    console.log(data)
-    this.ProductsService.postProduct(data).subscribe((data) => this.products.push(data))
-  }
+  // postData(data: IProducts) {
+  //   console.log(data)
+  //   this.ProductsService.postProduct(data).subscribe((data) => this.products.push(data))
+  // }
 
-  updateData(product: IProducts) {
-    this.ProductsService.updateProduct(product).subscribe((data) => {
-      this.products = this.products.map((product) => {
-        if (product.id === data.id) {
-          return data
-        } else {
-          return product
-        }
-      })
-    })
+  // updateData(product: IProducts) {
+  //   this.ProductsService.updateProduct(product).subscribe((data) => {
+  //     this.products = this.products.map((product) => {
+  //       if (product.id === data.id) {
+  //         return data
+  //       } else {
+  //         return product
+  //       }
+  //     })
+  //   })
 
-  }
+  // }
 
   ngOnDestroy() {
     if (this.productsSubscription) this.productsSubscription.unsubscribe()

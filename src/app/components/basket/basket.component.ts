@@ -17,8 +17,14 @@ export class BasketComponent implements OnInit {
   total = 0
 
   ngOnInit(): void {
-    this.basketSubscription = this.ProductsService.getProductFromBasket().subscribe((data) => {
-      this.basket = data
+    // this.basketSubscription = this.ProductsService.getProductFromBasket().subscribe((data) => {
+    //   this.basket = data
+    //   this.basket.forEach(item => {
+    //     this.total += (item.quantity * item.price)
+    //   })
+    // })
+    this.basketSubscription = this.ProductsService.getProductFromBasket().subscribe(basket => {
+      this.basket = basket
       this.basket.forEach(item => {
         this.total += (item.quantity * item.price)
       })
@@ -30,13 +36,13 @@ export class BasketComponent implements OnInit {
     if (this.basketSubscription) this.basketSubscription.unsubscribe()
   }
 
-  minusItemFromBasket(item: IProducts) {
+  minusItemFromBasket(item: any) {
     if(item.quantity === 1) {
-      this.ProductsService.deleteProductFromBasket(item.id).subscribe(() => {
+      this.ProductsService.deleteProductFromBasket(item.id)
         let idx = this.basket.findIndex((data) => data.id === item.id)
         this.basket.splice(idx, 1)
         this.total = 0
-      })
+      
     } else {
       item.quantity -= 1;
       this.ProductsService.updateProductToBasket(item).subscribe((data) => {

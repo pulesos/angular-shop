@@ -1,14 +1,14 @@
 <div class="container">
     <mat-card class="example-card" *ngFor="let item of basket">
       <mat-card-title>{{item.title}}</mat-card-title>
-      <img class="image" mat-card-image src="{{item.image}}" />
+      <img class="image" mat-card-image src="{{item.image || 'https://pngimg.com/uploads/question_mark/small/question_mark_PNG117.png'}}" />
       <mat-card-content>
         <p>Price: {{item.price | currency}}</p>
         <p>Year: {{item.year}}</p>
-        <p>Chip: {{item.configure.chip}}</p>
-        <p>SSD: {{item.configure.SSD}}</p>
-        <p>Display: {{item.configure.display}}</p>
-        <p>Memory: {{item.configure.memory}}</p>
+        <p>Chip: {{item.chip}}</p>
+        <p>SSD: {{item.SSD}}</p>
+        <p>Display: {{item.display}}</p>
+        <p>Memory: {{item.memory}}</p>
   
       </mat-card-content>
       <mat-card-actions>

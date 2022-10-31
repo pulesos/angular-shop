@@ -1,19 +1,18 @@
 <div class="container">
     <mat-card class="example-card">
             <mat-card-title>{{product.title}}</mat-card-title>
-            <img class="image" mat-card-image src="{{product.image}}"/>
+            <img class="image" mat-card-image src="{{product.image || 'https://pngimg.com/uploads/question_mark/small/question_mark_PNG117.png'}}"/>
         <mat-card-content>
             <p>Price: {{product.price | currency}}</p>
             <p>Year:  {{product.year}}</p>
-            <p>Chip: {{product.configure.chip}}</p>
-            <p>SSD: {{product.configure.SSD}}</p>
-            <p>Display: {{product.configure.display}}</p>
-            <p>Memory: {{product.configure.memory}}</p>
+            <p>Chip: {{product.chip}}</p>
+            <p>SSD: {{product.SSD}}</p>
+            <p>Display: {{product.display}}</p>
+            <p>Memory: {{product.memory}}</p>
         </mat-card-content>
         <mat-card-actions>
 
             <button class="button" mat-flat-button color="primary">В корзину</button>
-            <button class="button" mat-flat-button color="primary" [routerLink]="['/product', product.id]">Подробнее</button>
         </mat-card-actions>
       </mat-card>
 </div>
