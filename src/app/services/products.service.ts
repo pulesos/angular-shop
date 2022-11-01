@@ -84,17 +84,17 @@ export class ProductsService {
   //   return this.http.put<IProducts>(`${this.urlBasket}/${product.id}`, product)
   // }
 
-  updateProductToBasket(product: IProducts): Observable<any> {
-    const ref = doc(this.firestore, 'products', product.uid)
-    return from(updateDoc(ref, {...product}))
+  updateProductToBasket(basket: IProducts): Observable<any> {
+    const ref = doc(this.firestore, 'basket', basket.uid)
+    return from(updateDoc(ref, {...basket}))
   }
 
   // deleteProductFromBasket(id: number) {
   //   return this.http.delete<any>(`${this.urlBasket}/${id}`)
   // }
 
-  deleteProductFromBasket(product: IProducts) {
-    const productDocRef = doc(this.firestore, `products/${product.id}`)
+  deleteProductFromBasket(basket: IProducts) {
+    const productDocRef = doc(this.firestore, `basket/${basket.id}`)
     return deleteDoc(productDocRef)
   }
 }

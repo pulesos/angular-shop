@@ -36,16 +36,16 @@ export class BasketComponent implements OnInit {
     if (this.basketSubscription) this.basketSubscription.unsubscribe()
   }
 
-  minusItemFromBasket(item: any) {
-    if(item.quantity === 1) {
-      this.ProductsService.deleteProductFromBasket(item.id)
-        let idx = this.basket.findIndex((data) => data.id === item.id)
+  minusItemFromBasket(basket: IProducts) {
+    if(basket.quantity === 1) {
+      this.ProductsService.deleteProductFromBasket(basket)
+        let idx = this.basket.findIndex((data) => data.id === basket.id)
         this.basket.splice(idx, 1)
         this.total = 0
       
     } else {
-      item.quantity -= 1;
-      this.ProductsService.updateProductToBasket(item).subscribe((data) => {
+      basket.quantity -= 1;
+      this.ProductsService.updateProductToBasket(basket).subscribe((data) => {
         this.basket.forEach(item => {
           this.total -= item.price
         })
@@ -54,9 +54,9 @@ export class BasketComponent implements OnInit {
 
   }
 
-  plusItemFromBasket(item: IProducts) {
-    item.quantity += 1;
-    this.ProductsService.updateProductToBasket(item).subscribe((data) => {
+  plusItemFromBasket(basket: IProducts) {
+    basket.quantity += 1;
+    this.ProductsService.updateProductToBasket(basket).subscribe((data) => {
       this.basket.forEach(item => {
         this.total += item.price
       })

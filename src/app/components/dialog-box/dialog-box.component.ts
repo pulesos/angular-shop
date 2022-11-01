@@ -13,21 +13,21 @@ export class DialogBoxComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<DialogBoxComponent>,
     private ProductsService: ProductsService,
-    @Inject(MAT_DIALOG_DATA) public data: any,
+    @Inject(MAT_DIALOG_DATA) public product: any,
   ) {
-    if (this.data) this.isNew = false;
+    if (this.product) this.isNew = false;
   }
 
 
   myForm: FormGroup = new FormGroup({
-    id: new FormControl(this.data?.id ?? null),
-    title: new FormControl(this.data?.title ?? '', [Validators.required]),
-    price: new FormControl(this.data?.price ?? '', [Validators.required, Validators.pattern("^[0-9]*$")]),
-    year: new FormControl(this.data?.year ?? '', [Validators.required, Validators.pattern("^[0-9]*$")]),
-    chip: new FormControl(this.data?.chip ?? '', [Validators.required, Validators.pattern("^[0-9]*$")]),
-    ssd: new FormControl(this.data?.ssd ?? '', [Validators.required, Validators.pattern("^[0-9]*$")]),
-    memory: new FormControl(this.data?.memory ?? '', [Validators.required, Validators.pattern("^[0-9]*$")]),
-    display: new FormControl(this.data?.display ?? '', [Validators.required]),
+    id: new FormControl(this.product?.id),
+    title: new FormControl(this.product?.title ?? '', [Validators.required]),
+    price: new FormControl(this.product?.price ?? '', [Validators.required, Validators.pattern("^[0-9]*$")]),
+    year: new FormControl(this.product?.year ?? '', [Validators.required, Validators.pattern("^[0-9]*$")]),
+    chip: new FormControl(this.product?.chip ?? '', [Validators.required, Validators.pattern("^[0-9]*$")]),
+    ssd: new FormControl(this.product?.ssd ?? '', [Validators.required, Validators.pattern("^[0-9]*$")]),
+    memory: new FormControl(this.product?.memory ?? '', [Validators.required, Validators.pattern("^[0-9]*$")]),
+    display: new FormControl(this.product?.display ?? '', [Validators.required]),
 
   })
 
@@ -53,16 +53,15 @@ export class DialogBoxComponent implements OnInit {
     //   }
     // }
 
-    if (this.isNew) {
-      const response = await this.ProductsService.postProduct(this.myForm.value)
-    } else {
-      this.updateData()
-    }
+    
+    const response = await this.ProductsService.postProduct(this.myForm.value)
+    
+    
 
     // this.updateData()
     // console.log(response)
     
-    this.dialogRef.close(this.data);
+    this.dialogRef.close(this.product);
 
   }
 
